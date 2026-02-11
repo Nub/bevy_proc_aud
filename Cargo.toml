@@ -1,0 +1,25 @@
+[package]
+name = "bevy_proc_aud"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+bevy = { version = "0.18", default-features = false, features = ["bevy_audio", "bevy_asset"] }
+fundsp = "0.23"
+
+[dev-dependencies]
+bevy = "0.18"
+bevy_egui = "0.39"
+
+[[example]]
+name = "heartbeat"
+path = "examples/heartbeat.rs"
+
+[[example]]
+name = "ear_ringing"
+path = "examples/ear_ringing.rs"
+
+[[example]]
+name = "custom_synth"
+path = "examples/custom_synth.rs"
