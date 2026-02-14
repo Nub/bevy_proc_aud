@@ -23,3 +23,7 @@ path = "examples/ear_ringing.rs"
 [[example]]
 name = "custom_synth"
 path = "examples/custom_synth.rs"
+
+[[example]]
+name = "sword_slash"
+path = "examples/sword_slash.rs"
