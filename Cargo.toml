@@ -27,3 +27,7 @@ path = "examples/custom_synth.rs"
 [[example]]
 name = "sword_slash"
 path = "examples/sword_slash.rs"
+
+[[example]]
+name = "lightning"
+path = "examples/lightning.rs"

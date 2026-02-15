@@ -13,5 +13,6 @@ pub mod prelude {
     pub use crate::presets::blunt_impact::BluntImpact;
     pub use crate::presets::ear_ringing::EarRinging;
     pub use crate::presets::heartbeat::Heartbeat;
+    pub use crate::presets::lightning::{LightningStrike, LightningZap};
     pub use crate::presets::sword_slash::SwordSlash;
 }

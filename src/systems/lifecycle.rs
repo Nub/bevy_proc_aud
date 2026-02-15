@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+use crate::components::lifetime::OneShotLifetime;
 use crate::dsp::graph_builder::SynthParams;
 use crate::dsp::source::ProceduralAudio;
 use crate::presets::ear_ringing::EarRingingParams;
@@ -20,5 +21,20 @@ pub fn audio_cleanup_system(
     }
     for entity in removed_ear_ringing.read() {
         commands.entity(entity).remove::<AudioPlayer<ProceduralAudio>>();
+    }
+}
+
+/// Despawn one-shot audio entities after their sound has finished.
+pub fn oneshot_lifetime_system(
+    mut commands: Commands,
+    time: Res<Time>,
+    mut query: Query<(Entity, &mut OneShotLifetime)>,
+) {
+    let dt = time.delta_secs();
+    for (entity, mut lifetime) in &mut query {
+        lifetime.elapsed += dt;
+        if lifetime.elapsed >= lifetime.duration {
+            commands.entity(entity).despawn();
+        }
     }
 }

@@ -4,9 +4,10 @@ use bevy::prelude::*;
 use crate::dsp::source::ProceduralAudio;
 use crate::systems::build::{
     blunt_impact_build_system, ear_ringing_build_system, graph_build_system,
-    heartbeat_build_system, sword_slash_build_system,
+    heartbeat_build_system, lightning_strike_build_system, lightning_zap_build_system,
+    sword_slash_build_system,
 };
-use crate::systems::lifecycle::audio_cleanup_system;
+use crate::systems::lifecycle::{audio_cleanup_system, oneshot_lifetime_system};
 use crate::systems::sync::{ear_ringing_sync_system, heartbeat_sync_system, param_sync_system};
 
 /// Main plugin for bevy_proc_aud.
@@ -26,12 +27,15 @@ impl Plugin for BevyProcAudPlugin {
                     ear_ringing_build_system,
                     sword_slash_build_system,
                     blunt_impact_build_system,
+                    lightning_zap_build_system,
+                    lightning_strike_build_system,
                     // Sync systems (react to Changed<T>).
                     param_sync_system,
                     heartbeat_sync_system,
                     ear_ringing_sync_system,
                     // Lifecycle.
                     audio_cleanup_system,
+                    oneshot_lifetime_system,
                 ),
             );
     }
