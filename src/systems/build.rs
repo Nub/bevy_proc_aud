@@ -8,6 +8,7 @@ use crate::dsp::graph_builder::build_synth_graph;
 use crate::dsp::source::ProceduralAudio;
 use crate::presets::blunt_impact::{build_blunt_impact_graph, BluntImpact};
 use crate::presets::ear_ringing::{build_ear_ringing_graph, EarRinging};
+use crate::presets::explosion::{build_explosion_graph, Explosion};
 use crate::presets::heartbeat::{build_heartbeat_graph, Heartbeat};
 use crate::presets::lightning::{
     build_lightning_strike_graph, build_lightning_zap_graph, LightningStrike, LightningZap,
@@ -136,6 +137,24 @@ pub fn lightning_strike_build_system(
 ) {
     for (entity, ls) in &query {
         let graph = build_lightning_strike_graph(ls);
+        let audio = ProceduralAudio::new(graph, SAMPLE_RATE, CHANNELS);
+        let handle = assets.add(audio);
+
+        commands.entity(entity).insert((
+            AudioPlayer::<ProceduralAudio>(handle),
+            OneShotLifetime::new(3.0),
+        ));
+    }
+}
+
+/// Build DSP graph for newly-added `Explosion` entities.
+pub fn explosion_build_system(
+    mut commands: Commands,
+    query: Query<(Entity, &Explosion), Added<Explosion>>,
+    mut assets: ResMut<Assets<ProceduralAudio>>,
+) {
+    for (entity, ex) in &query {
+        let graph = build_explosion_graph(ex);
         let audio = ProceduralAudio::new(graph, SAMPLE_RATE, CHANNELS);
         let handle = assets.add(audio);
 
