@@ -10,6 +10,7 @@ pub mod prelude {
     pub use crate::components::synth::{Amplitude, Frequency, OscillatorType, Synth};
     pub use crate::dsp::source::ProceduralAudio;
     pub use crate::plugin::BevyProcAudPlugin;
+    pub use crate::presets::arcane_attack::ArcaneAttack;
     pub use crate::presets::blunt_impact::BluntImpact;
     pub use crate::presets::ear_ringing::EarRinging;
     pub use crate::presets::explosion::Explosion;

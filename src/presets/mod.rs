@@ -1,3 +1,4 @@
+pub mod arcane_attack;
 pub mod blunt_impact;
 pub mod ear_ringing;
 pub mod explosion;

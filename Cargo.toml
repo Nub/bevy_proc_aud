@@ -43,3 +43,7 @@ path = "examples/lightning.rs"
 [[example]]
 name = "explosion"
 path = "examples/explosion.rs"
+
+[[example]]
+name = "arcane_attack"
+path = "examples/arcane_attack.rs"
