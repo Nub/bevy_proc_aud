@@ -8,9 +8,11 @@ use crate::dsp::graph_builder::build_synth_graph;
 use crate::dsp::source::ProceduralAudio;
 use crate::presets::arcane_attack::{build_arcane_attack_graph, ArcaneAttack};
 use crate::presets::blunt_impact::{build_blunt_impact_graph, BluntImpact};
+use crate::presets::body_impact::{build_body_impact_graph, BodyImpact};
 use crate::presets::ear_ringing::{build_ear_ringing_graph, EarRinging};
 use crate::presets::explosion::{build_explosion_graph, Explosion};
 use crate::presets::heartbeat::{build_heartbeat_graph, Heartbeat};
+use crate::presets::human_grunt::{build_human_grunt_graph, HumanGrunt};
 use crate::presets::lightning::{
     build_lightning_strike_graph, build_lightning_zap_graph, LightningStrike, LightningZap,
 };
@@ -180,6 +182,42 @@ pub fn arcane_attack_build_system(
         commands.entity(entity).insert((
             AudioPlayer::<ProceduralAudio>(handle),
             OneShotLifetime::new(1.0),
+        ));
+    }
+}
+
+/// Build DSP graph for newly-added `BodyImpact` entities.
+pub fn body_impact_build_system(
+    mut commands: Commands,
+    query: Query<(Entity, &BodyImpact), Added<BodyImpact>>,
+    mut assets: ResMut<Assets<ProceduralAudio>>,
+) {
+    for (entity, bi) in &query {
+        let graph = build_body_impact_graph(bi);
+        let audio = ProceduralAudio::new(graph, SAMPLE_RATE, CHANNELS);
+        let handle = assets.add(audio);
+
+        commands.entity(entity).insert((
+            AudioPlayer::<ProceduralAudio>(handle),
+            OneShotLifetime::new(0.5),
+        ));
+    }
+}
+
+/// Build DSP graph for newly-added `HumanGrunt` entities.
+pub fn human_grunt_build_system(
+    mut commands: Commands,
+    query: Query<(Entity, &HumanGrunt), Added<HumanGrunt>>,
+    mut assets: ResMut<Assets<ProceduralAudio>>,
+) {
+    for (entity, grunt) in &query {
+        let graph = build_human_grunt_graph(grunt);
+        let audio = ProceduralAudio::new(graph, SAMPLE_RATE, CHANNELS);
+        let handle = assets.add(audio);
+
+        commands.entity(entity).insert((
+            AudioPlayer::<ProceduralAudio>(handle),
+            OneShotLifetime::new(0.7),
         ));
     }
 }

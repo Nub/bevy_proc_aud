@@ -12,9 +12,11 @@ pub mod prelude {
     pub use crate::plugin::BevyProcAudPlugin;
     pub use crate::presets::arcane_attack::ArcaneAttack;
     pub use crate::presets::blunt_impact::BluntImpact;
+    pub use crate::presets::body_impact::BodyImpact;
     pub use crate::presets::ear_ringing::EarRinging;
     pub use crate::presets::explosion::Explosion;
     pub use crate::presets::heartbeat::Heartbeat;
+    pub use crate::presets::human_grunt::HumanGrunt;
     pub use crate::presets::lightning::{LightningStrike, LightningZap};
     pub use crate::presets::sword_slash::SwordSlash;
 }
